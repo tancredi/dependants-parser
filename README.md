@@ -1,6 +1,7 @@
 # dependants-parser
 
 [![Build Status](https://travis-ci.org/tancredi/dependants-parser.png)](https://travis-ci.org/tancredi/dependants-parser)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tancredi/dependants-parser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 > Utility to recursively fetch dependant modules by parsing require syntaxes targeting a specified local module using a given a root directory and an import expression regex.
 
@@ -84,6 +85,3 @@ It would be great to provide import syntaxes for other languages / pre-processor
 Please feel free to drop a pull request if you're using this module with a custom expressions or improving the current ones / writing more tests.
 
 Regexes are tested in `test/regexes.js`.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tancredi/dependants-parser/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
