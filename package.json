@@ -1,0 +1,18 @@
+{
+  "name": "dependant-tree",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "mocha": "~1.14.0"
+  },
+  "dependencies": {
+    "walkdir": "0.0.7",
+    "should": "~2.1.0"
+  }
+}
