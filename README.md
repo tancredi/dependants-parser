@@ -41,7 +41,7 @@ Considering the following tree:
 
 stylus/root.styl:
 
-```
+```stylus
 @import 'target.styl'
 ```
 
