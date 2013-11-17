@@ -47,7 +47,7 @@ stylus/root.styl:
 
 index.js:
 
-```
+```javascript
 var dependants = require('dependants-tree');
 
 var out = dependants.findSync(
