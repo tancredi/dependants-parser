@@ -1,7 +1,7 @@
 {
-  "name": "dependant-tree",
+  "name": "dependants-parser",
   "version": "0.0.0",
-  "description": "",
+  "description": "Parse dependants given a module, a root and an import syntax",
   "main": "index.js",
   "scripts": {
     "test": "mocha test"
