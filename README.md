@@ -75,8 +75,8 @@ Returns an array containing absolute paths of all modules that depend on `filepa
 
 Contains simple ready-to-use regexes for local import syntaxes
 
-* `stylus` - @import 'module` syntax for Stylus
-* `commonjs` - @import 'module` syntax for CommonJS requires
+* `.stylus` - `@import 'module'` Stylus syntax
+* `.commonjs` - `require('module')` CommonJS syntax
 
 ## Contribute
 
