@@ -1,5 +1,7 @@
 # dependants-parser
 
+[![Build Status](https://travis-ci.org/tancredi/dependants-parser.png)](https://travis-ci.org/tancredi/dependants-parser)
+
 > Utility to recursively fetch dependant modules by parsing require syntaxes targeting a specified local module using a given a root directory and an import expression regex.
 
 ## The problem
