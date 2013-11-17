@@ -51,8 +51,8 @@ index.js:
 var dependants = require('dependants-tree');
 
 var out = dependants.findSync(
-	'./stylus/target.styl',		// Target dependency
-	'./stylus',					// Modules root
+	'stylus/target.styl',		// Target dependency
+	'stylus',					// Modules root
 	dependants.patterns.stylus	// Import expression regex
 	);
 
