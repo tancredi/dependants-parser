@@ -59,7 +59,7 @@ console.log(out);
 
 ## Exports
 
-####`.findSync([ filepath ], [ root ], [ importRegex ], [ match ])`
+#### `.findSync([ filepath ], [ root ], [ importRegex ], [ match ])`
 
 Returns an array containing absolute paths of all modules that depend on `filepath` found in `root`, given an import expression syntax.
 
@@ -68,7 +68,7 @@ Returns an array containing absolute paths of all modules that depend on `filepa
 * `[ importRegex ]` - Import syntax expression. Used to parse out a file's dependency.
 * `[ match ]` - Filename match expression. Use to filter files to scan.
 
-### `.patterns`
+#### `.patterns`
 
 Contains simple ready-to-use regexes for local import syntaxes
 
