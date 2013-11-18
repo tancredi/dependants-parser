@@ -7,7 +7,7 @@
 
 ## The problem
 
-While writing a custom watch-build tool I needed some quick and dirty way to figure out which modules depended on the  file that changed would be emitted to in order to avoid re-compiling every file in the codebase at every change.
+While writing a custom watch-build tool I needed some quick and easy way to figure out which modules depended on the  file that changed would be emitted to in order to avoid re-compiling every file in the codebase at every change.
 
 This tool is easily extensible to work with most pre-processors & syntaxes as long as their import command can be expressed with a regular expression and the modules are located relatively to the target file.
 

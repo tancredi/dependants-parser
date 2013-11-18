@@ -1,6 +1,6 @@
 {
   "name": "dependants-parser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Parse dependants given a module, a root and an import syntax",
   "main": "index.js",
   "repository": {
@@ -10,13 +10,9 @@
   "scripts": {
     "test": "mocha test"
   },
-  "author": "",
+  "author": "Tancredi Trugenberger",
   "license": "BSD-2-Clause",
-  "devDependencies": {
-    "mocha": "~1.14.0"
-  },
   "dependencies": {
-    "walkdir": "0.0.7",
-    "should": "~2.1.0"
+    "walkdir": "0.0.7"
   }
 }
