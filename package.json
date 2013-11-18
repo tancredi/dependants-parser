@@ -1,8 +1,12 @@
 {
   "name": "dependants-parser",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Parse dependants given a module, a root and an import syntax",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tancredi/dependants-parser"
+  },
   "scripts": {
     "test": "mocha test"
   },
