@@ -16,13 +16,13 @@ describe('Stylus regex', function () {
             '@import foo\n' +
             '@import  foo;\n' +
             '@import    (  foo    )',
-            match = patterns.stylus.exec(matches);
+            match = patterns.stylus.exp.exec(matches);
 
-        matches.match(patterns.stylus).should.have.length(9);
+        matches.match(patterns.stylus.exp).should.have.length(9);
 
         while (match) {
             match[1].should.match(/foo|\.\/foo|foo_bar-test\.suf/);
-            match = patterns.stylus.exec(matches);
+            match = patterns.stylus.exp.exec(matches);
         }
     });
     it('ignores incorrect imports', function () {
@@ -31,7 +31,7 @@ describe('Stylus regex', function () {
             '@ import foo\n' +
             '@include "foo"\n' +
             '$import "foo"\n';
-        should.not.exist(matches.match(patterns.stylus));
+        should.not.exist(matches.match(patterns.stylus.exp));
     });
 });
 
@@ -45,13 +45,13 @@ describe('CommonJS regex', function () {
             'require    (  "./foo"    )\n' +
             'require    (  "../foo"    )\n' +
             'require("./foo.js")\n',
-            match = patterns.commonjs.exec(matches);
+            match = patterns.commonjs.exp.exec(matches);
 
-        matches.match(patterns.commonjs).should.have.length(7);
+        matches.match(patterns.commonjs.exp).should.have.length(7);
 
         while (match) {
             match[1].should.match(/\.\/foo|foo_bar-test\.suf/);
-            match = patterns.commonjs.exec(matches);
+            match = patterns.commonjs.exp.exec(matches);
         }
     });
     it('ignores incorrect imports', function () {
@@ -65,6 +65,6 @@ describe('CommonJS regex', function () {
             'require    (  ./foo"    )' +
             'require    (  ".../foo"    )' +
             'require    (  ".foo"    )';
-        should.not.exist(matches.match(patterns.commonjs));
+        should.not.exist(matches.match(patterns.commonjs.exp));
     });
 });

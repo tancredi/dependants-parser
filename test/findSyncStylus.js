@@ -5,14 +5,14 @@ require('should');
 var dependantTree = require('../index'),
     path = require('path');
 
-var importExpression = /@import[\s\t]{0,}[\(]?[\s\t]{0,}['|"]?([a-zA-Z0-9*\/\.\-\_]{1,})[\s\t]{0,}[\n|;|\s|'|")]/g;
+var importPattern = dependantTree.patterns.stylus;
 
 describe('.findSync Stylus', function () {
     it('returns no dependants of an anused module', function () {
         var dependants = dependantTree.findSync(
             'test/stylus/stand-alone.styl',
             'test/stylus',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(0);
@@ -21,7 +21,7 @@ describe('.findSync Stylus', function () {
         var dependants = dependantTree.findSync(
             'test/stylus/direct-child.styl',
             'test/stylus',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(1);
@@ -31,7 +31,7 @@ describe('.findSync Stylus', function () {
         var dependants = dependantTree.findSync(
             'test/stylus/second-child.styl',
             'test/stylus',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(2);
@@ -42,7 +42,7 @@ describe('.findSync Stylus', function () {
         var dependants = dependantTree.findSync(
             'test/stylus/child-dead-branch.styl',
             'test/stylus',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(3);
@@ -54,7 +54,7 @@ describe('.findSync Stylus', function () {
         var dependants = dependantTree.findSync(
             'test/stylus/child-of-sub-root.styl',
             'test/stylus',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(1);
@@ -64,7 +64,7 @@ describe('.findSync Stylus', function () {
         var dependants = dependantTree.findSync(
             'test/stylus/sub/child-subdir.styl',
             'test/stylus',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(4);
@@ -77,7 +77,7 @@ describe('.findSync Stylus', function () {
         var dependants = dependantTree.findSync(
             'test/stylus/sub/sub/sub/child-remote.styl',
             'test/stylus',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(1);

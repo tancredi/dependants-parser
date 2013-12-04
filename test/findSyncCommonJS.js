@@ -5,14 +5,14 @@ require('should');
 var dependantTree = require('../index'),
     path = require('path');
 
-var importExpression = /require[\s\t]{0,}\([\s\t]{0,}['|"]([\.].*)['|"][\s|\t]{0,}\)/g;
+var importPattern = dependantTree.patterns.commonjs;
 
 describe('.findSync CommonJS', function () {
     it('returns no dependants of an anused module', function () {
         var dependants = dependantTree.findSync(
             'test/commonjs/stand-alone.js',
             'test/commonjs',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(0);
@@ -21,7 +21,7 @@ describe('.findSync CommonJS', function () {
         var dependants = dependantTree.findSync(
             'test/commonjs/a.js',
             'test/commonjs',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(1);
@@ -31,7 +31,7 @@ describe('.findSync CommonJS', function () {
         var dependants = dependantTree.findSync(
             'test/commonjs/b.js',
             'test/commonjs',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(2);
@@ -42,7 +42,7 @@ describe('.findSync CommonJS', function () {
         var dependants = dependantTree.findSync(
             'test/commonjs/c.js',
             'test/commonjs',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(4);
@@ -55,7 +55,7 @@ describe('.findSync CommonJS', function () {
         var dependants = dependantTree.findSync(
             'test/commonjs/sub/a.js',
             'test/commonjs',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(1);

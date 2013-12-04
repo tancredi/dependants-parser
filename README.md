@@ -68,7 +68,7 @@ Returns an array containing absolute paths of all modules that depend on `filepa
 
 * `[ filepath ]` - Path to target module. This needs to be the real filename.
 * `[ root ]` - Directory to recursively scan for dependants.
-* `[ importRegex ]` - Import syntax expression. Used to parse out a file's dependency.
+* `[ importPattern ]` - Import syntax expression. Used to parse out a file's dependency. You can also pass an object containing the keys 'exp' (RegExp) and 'offset' (number) of the result module string
 * `[ match ]` - (Optional) Filename match expression. Use to filter files to scan.
 
 #### `.patterns`

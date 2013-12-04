@@ -5,14 +5,15 @@ require('should');
 var dependantTree = require('../index'),
     path = require('path');
 
-var importExpression = /import (.*)/g;
+var importPattern = { exp: /import (.*)/g, offset: 0 },
+    offsetImportPattern = { exp: /(i)(m)port (.*)/g, offset: 2 };
 
 describe('.findSync', function () {
     it('all files are returned when called without match pattern', function () {
         var dependants = dependantTree.findSync(
             'test/basics/target.ext',
             'test/basics',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(3);
@@ -20,12 +21,38 @@ describe('.findSync', function () {
         dependants.should.include(path.resolve('test/basics/ignore.me'));
         dependants.should.include(path.resolve('test/basics/sub/sub-root.ext'));
     });
-    it('all files are returned when called without match pattern', function () {
+    it('only matching files are returned when called with match pattern', function () {
         var match = /(.*).ext/,
             dependants = dependantTree.findSync(
                 'test/basics/target.ext',
                 'test/basics',
-                importExpression,
+                importPattern,
+                match
+                );
+
+        dependants.should.have.length(2);
+        dependants.should.include(path.resolve('test/basics/root.ext'));
+        dependants.should.include(path.resolve('test/basics/sub/sub-root.ext'));
+    });
+    it('returns correct filenames when using an offset pattern', function () {
+        var match = /(.*).ext/,
+            dependants = dependantTree.findSync(
+                'test/basics/target.ext',
+                'test/basics',
+                offsetImportPattern,
+                match
+                );
+
+        dependants.should.have.length(2);
+        dependants.should.include(path.resolve('test/basics/root.ext'));
+        dependants.should.include(path.resolve('test/basics/sub/sub-root.ext'));
+    });
+    it('converts given pattern regex into object with offset 0 when not specified', function () {
+        var match = /(.*).ext/,
+            dependants = dependantTree.findSync(
+                'test/basics/target.ext',
+                'test/basics',
+                importPattern.exp,
                 match
                 );
 
@@ -37,7 +64,7 @@ describe('.findSync', function () {
         var dependants = dependantTree.findSync(
             'test/basics/target.ext',
             'test/basics/sub',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(1);
@@ -47,7 +74,7 @@ describe('.findSync', function () {
         var dependants = dependantTree.findSync(
             'test/basics/parallel/target.ext',
             'test/basics/sub',
-            importExpression
+            importPattern
             );
 
         dependants.should.have.length(1);
@@ -58,7 +85,7 @@ describe('.findSync', function () {
             dependantTree.findSync(
                 'test/basics/parallel/target.ext',
                 'test/basics/I_dont_exist',
-                importExpression
+                importPattern
                 );
         }).should.throw();
     });

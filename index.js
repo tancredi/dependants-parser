@@ -3,8 +3,8 @@ var walk = require('walkdir'),
     path = require('path');
 
 var patterns = {
-    stylus: /@import[\s\t]*[\(]?[\s\t]*['"]?([a-zA-Z0-9*\/\.\-\_]*)[\s\t]*[\n;\s'")]?/g,
-    commonjs: /require[\t\s]*\([\t\s]*["']{1}([\.]{1,2}\/.*)(\.js)?["'][\t\s]*\)/g
+    stylus: { exp: /@import[\s\t]*[\(]?[\s\t]*['"]?([a-zA-Z0-9*\/\.\-\_]*)[\s\t]*[\n;\s'")]?/g, offset: 0 },
+    commonjs: { exp: /require[\t\s]*\([\t\s]*["']{1}([\.]{1,2}\/.*)(\.js)?["'][\t\s]*\)/g, offset: 0 }
 };
 
 function removeExtension (filename) {
@@ -19,27 +19,27 @@ function getDir (filename) {
     return parts.join('/');
 }
 
-function getDirectDependencies (file, root, importExp) {
+function getDirectDependencies (file, root, importPattern) {
     var imports = [],
-        match = importExp.exec(file.content);
+        match = importPattern.exp.exec(file.content);
 
     while (match) {
-        imports.push(path.relative(root, path.resolve(root, file.dir, match[1])));
-        match = importExp.exec(file.content);
+        imports.push(path.relative(root, path.resolve(root, file.dir, match[1 + importPattern.offset])));
+        match = importPattern.exp.exec(file.content);
     }
 
     return imports || [];
 }
 
-function getDependentsRec (target, tree, root, importExp) {
+function getDependentsRec (target, tree, root, importPattern) {
     var out = [],
         directDependencies;
 
     for (var name in tree) {
-        directDependencies = getDirectDependencies(tree[name], root, importExp);
+        directDependencies = getDirectDependencies(tree[name], root, importPattern);
         if (directDependencies.indexOf(target) !== -1) {
             out.push(tree[name].filename);
-            out = out.concat(getDependentsRec(name, tree, root, importExp));
+            out = out.concat(getDependentsRec(name, tree, root, importPattern));
         }
     }
 
@@ -62,11 +62,15 @@ function removeDuplicates (arr) {
     return out;
 }
 
-function findDependantsSync (filepath, root, importExp, match) {
+function findDependantsSync (filepath, root, importPattern, match) {
     var targetStats = walk.sync(root, { 'return_object': true }),
         tree = {},
         targetName = getModuleName(filepath, root),
         filename, name;
+
+    if (importPattern instanceof RegExp) {
+        importPattern = { exp: importPattern, offset: 0 };
+    }
 
     for (filename in targetStats) {
         if (targetStats.hasOwnProperty(filename)) {
@@ -81,7 +85,7 @@ function findDependantsSync (filepath, root, importExp, match) {
         }
     }
 
-    return removeDuplicates(getDependentsRec(targetName, tree, root, importExp));
+    return removeDuplicates(getDependentsRec(targetName, tree, root, importPattern));
 }
 
 module.exports = { patterns: patterns, findSync: findDependantsSync };
