@@ -1,6 +1,6 @@
 {
   "name": "dependants-parser",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Parse dependants given a module, a root and an import syntax",
   "main": "index.js",
   "repository": {

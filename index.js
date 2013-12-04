@@ -4,7 +4,8 @@ var walk = require('walkdir'),
 
 var patterns = {
     stylus: { exp: /@import[\s\t]*[\(]?[\s\t]*['"]?([a-zA-Z0-9*\/\.\-\_]*)[\s\t]*[\n;\s'")]?/g, offset: 0 },
-    commonjs: { exp: /require[\t\s]*\([\t\s]*["']{1}([\.]{1,2}\/.*)(\.js)?["'][\t\s]*\)/g, offset: 0 }
+    commonjs: { exp: /require[\t\s]*\([\t\s]*["']{1}([\.]{1,2}\/.*)(\.js)?["'][\t\s]*\)/g, offset: 0 },
+    jade: { exp: /(^|\n|\:)\s*(include|extends)\s+([^\n\s\"\'].+)/g, offset: 2 }
 };
 
 function removeExtension (filename) {
